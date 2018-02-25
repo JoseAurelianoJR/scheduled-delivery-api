@@ -1,11 +1,15 @@
 (ns api-core.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+            [ring.middleware.cors :refer [wrap-cors]]
+            [ring.middleware.json :refer [wrap-json-response wrap-json-body]]))
 
 (defroutes app-routes
   (GET "/" [] "Hello World")
   (route/not-found "Not Found"))
 
 (def app
-  (wrap-defaults app-routes site-defaults))
+  (-> app-routes
+      wrap-json-response
+      wrap-json-body
+      (wrap-cors #".*")))
