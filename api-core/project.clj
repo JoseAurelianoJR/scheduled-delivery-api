@@ -8,9 +8,13 @@
                  [ring/ring-json "0.4.0"]
                  [korma "0.4.3"]
                  [org.postgresql/postgresql "42.2.1"]
-                 [jumblerg/ring.middleware.cors "1.0.1"]]
+                 [jumblerg/ring.middleware.cors "1.0.1"]
+                 [piton "0.1.1"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler api-core.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.0"]]}})
+                        [ring/ring-mock "0.3.0"]]}
+        {:piton {:dburl "jdbc:postgresql://localhost:5432/scheduled-delivery"
+               :dbuser "joseaureliano"
+               :dbpass ""}}})
